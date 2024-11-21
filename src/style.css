@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/roboto/v32/KFOlCnqEu92Fr1MmYUtfBxc4EsA.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'EB Garamond';
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ebgaramond/v30/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2) format('woff2');
+    }
+
+    /* latin */
+    @font-face {
+        font-family: 'Rosarivo';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/rosarivo/v22/PlI4Fl2lO6N9f8HaNDeA4HtkmA.woff2) format('woff2');
+    }
+
+    /* latin */
+    @font-face {
+        font-family: 'Rosarivo';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/rosarivo/v22/PlI-Fl2lO6N9f8HaNDeF0Hk.woff2) format('woff2');
+    }
+}
+
+a {
+    @apply text-purple-400 hover:underline italic
+}
+
+[type='text'],
+input:where(:not([type])),
+[type='email'],
+[type='url'],
+[type='password'],
+[type='number'],
+[type='date'],
+[type='datetime-local'],
+[type='month'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='week'],
+[multiple],
+textarea,
+select, .form-input, .form-textarea, .form-select, .form-multiselect {
+    @apply bg-transparent border-zinc-500 rounded-md shadow-inner focus:border-purple-600 focus:ring focus:ring-purple-500 focus:ring-opacity-25;
+}
+
+table.table-compendium>thead>tr {
+    @apply text-center
+}
+
+table.table-compendium>tbody>tr:nth-child(odd) {
+    @apply bg-purple-975
+}
+
+table.table-compendium>tbody>tr:nth-child(2n) {
+    @apply bg-purple-980
+}
+
+table.table-compendium td, table.table-compendium th {
+    padding: 5px 20px !important;
+    @apply border border-zinc-800
+}
+
+.compendium ul {
+    list-style: disc;
+    margin: auto;
+    padding: revert;
+}
+
+.compendium p {
+    margin-bottom: 1em;
+}
