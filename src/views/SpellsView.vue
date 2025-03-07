@@ -1,5 +1,5 @@
 <script setup>
-import SpellDisplayTable from '@/components/SpellDisplayTable.vue';
+import SpellDisplayTable from '@/components/spells/SpellDisplayTable.vue';
 </script>
 
 <template>

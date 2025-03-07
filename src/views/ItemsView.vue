@@ -1,5 +1,5 @@
 <script setup>
-import ItemDisplayTable from '@/components/ItemDisplayTable.vue';
+import ItemDisplayTable from '@/components/items/ItemDisplayTable.vue';
 </script>
 
 <template>

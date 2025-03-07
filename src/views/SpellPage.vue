@@ -35,22 +35,18 @@ export default {
 }
 </script>
 <script setup>
-import SpellDisplay from '../components/SpellDisplay.vue';
+import SpellDisplay from '../components/spells/SpellDisplay.vue';
+import DisplayTemplate from './DisplayTemplate.vue';
 </script>
 <template>
-    <div v-if="loading">Loading</div>
-    <div v-if="error">We're sorry about that</div>
-    <div v-if="spell" class="m-3 flex flex-col items-center">
-        <div class="max-w-5xl">
-            <h1 class="text-3xl my-3">{{ spell.name }}</h1>
-            <div
-                class="grid w-full px-3 py-6 border border-zinc-600 border-t-4 border-t-purple-600 lg:grid-cols-3 sm:grid-cols-1">
-                <SpellDisplay class=" border border-zinc-600 border-t-4 col-span-2" :spell="spell"></SpellDisplay>
-                <div class="flex flex-col items-center">
-                    <img :src="'/src/assets/spell_templates/dndcodex_' + spell.data.school.toLowerCase() + '.jpg'"
+    <DisplayTemplate :loading="loading" :error="error">
+        <template #name>{{ spell.name }}</template>
+        <template #display>
+            <SpellDisplay :spell="spell"></SpellDisplay>
+        </template>
+        <template #image>
+            <img :src="'/src/assets/spell_templates/dndcodex_' + spell.data.school.toLowerCase() + '.jpg'"
                         class="rounded-xl p-2">
-                </div>
-            </div>
-        </div>
-    </div>
+        </template>
+    </DisplayTemplate>
 </template>

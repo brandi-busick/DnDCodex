@@ -7,7 +7,7 @@ import SpellPage from '@/views/SpellPage.vue'
 import MonsterPage from '@/views/MonsterPage.vue'
 import ItemPage from '@/views/ItemPage.vue'
 import CreateNewView from '@/views/CreateNewView.vue'
-
+import SourceView from '@/views/SourceView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -48,6 +48,10 @@ const router = createRouter({
     {
       path: '/create/monster',
       component: CreateNewView
+    },
+    {
+      path: '/source',
+      component: SourceView
     },
     {
       path: '/about',

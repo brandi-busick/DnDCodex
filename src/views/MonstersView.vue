@@ -1,5 +1,5 @@
 <script setup>
-import MonsterDisplayTable from '../components/MonsterDisplayTable.vue'
+import MonsterDisplayTable from '../components/monsters/MonsterDisplayTable.vue'
 </script>
 
 <template>

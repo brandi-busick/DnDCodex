@@ -26,5 +26,6 @@ export default defineConfig({
       input: './src/main.js',
     },
   },
-  filenameHashing: false
+  filenameHashing: false,
+  assetsInclude: ['**/*.html']
 })
