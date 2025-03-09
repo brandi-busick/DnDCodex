@@ -36,6 +36,13 @@
         font-display: swap;
         src: url(https://fonts.gstatic.com/s/rosarivo/v22/PlI-Fl2lO6N9f8HaNDeF0Hk.woff2) format('woff2');
     }
+    body {
+        @apply bg-zinc-850;
+    }
+}
+html {
+    --top-spacing: 60px;
+    scroll-padding-top: var(--top-spacing);
 }
 
 a {
@@ -62,7 +69,7 @@ select, .form-input, .form-textarea, .form-select, .form-multiselect {
 }
 
 table.table-compendium>thead>tr {
-    @apply text-center
+    @apply text-center bg-purple-980 font-semibold
 }
 
 table.table-compendium>tbody>tr:nth-child(odd) {

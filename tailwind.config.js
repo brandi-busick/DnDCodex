@@ -6,22 +6,26 @@ export default {
   ],
   theme: {
     fontFamily: {
-      'sans': 'Roboto, Arial, sans-serif',
+      'sans': 'Roboto, Helvetica, sans-serif;',
       'serif': 'Rosarivo, Georgia, serif',
     },
     extend: {
       fontSize: {
-        xs: '0.5rem',
-        sm: '0.75rem',
-        base: '0.875rem',
-        xl: '1.25rem',
-        '2xl': '1.5rem',
-        '3xl': '1.875rem',
+        // xs: '0.5rem',
+        // sm: '0.75rem',
+        //base: '0.8rem',
+        // lg: '1rem',
+        // xl: '1.25rem',
+        // '2xl': '1.5rem',
+        // '3xl': '1.8rem',
       },
       aria: {
         cur: 'current="page"',
       },
       colors: {
+        zinc: {
+          '850': '#1e1e20'
+        },
         purple: {
           // 50: '#f8f7fb',
           // 100: '#f1f0f7',
