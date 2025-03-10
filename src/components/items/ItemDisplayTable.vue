@@ -35,7 +35,7 @@ export default {
             columnHelper.accessor('name', {
                 header: 'Name',
                 cell: (props) => (
-                    h('a', { href: '/items/' + props.row.original.id, class: ' not-italic' }, props.getValue())
+                    h('a', { href: '/magic-items/' + props.row.original.id, class: ' not-italic' }, props.getValue())
                 ),
             }),
             columnHelper.accessor('data.type', {

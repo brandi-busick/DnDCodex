@@ -1,32 +1,120 @@
 <script setup>
-import rawhtml from '../assets/adventures/ddb-callOfTheNetherdeep.html?raw';
-import { useScrollToc } from "@/composables/scroll-toc";
-
-const { currentSection, toc } = useScrollToc(
-    "article[data-toc-content]", { headinglevels: "h1, h2, h3" }
-);
-        const modules = import.meta.glob('@/assets/item_templates/*.jpg', { eager: true });
+import { nextTick } from 'vue';
 </script>
 <script>
 export default {
-    props: {
-        fileName: String,
-    },
-    mounted() {
-        console.log(modules);
-        for (const path in modules) {
-            modules[path]().then((mod) => {
-                console.log(path, mod)
-            })
+    data() {
+        return {
+            html: '',
+            loading: false,
+            loadingHeaders: true,
+            // toc: ref( { headers: [], headerSelector: "" }),
+            // currentSection: ref(""),
+            toc: { headers: [], headerSelector: "" },
+            currentSection: "",
+            selector: "article[data-toc-content]",
+            tocOptions: {
+                headinglevels: "h1, h2, h3",
+                appendAnchor: true,
+                anchorClass: "toc-anchor",
+                headerClass: "toc-header",
+            },
         }
+    },
+    created() {
+        // watch the params of the route to fetch the data again
+        this.$watch(
+            () => this.$route.params.id,
+            this.importHtml,
+            // fetch the data when the view is created and the data is
+            // already being observed
+            { immediate: true }
+        )
+    },
+    methods: {
+        async importHtml() {
+            const foo = await import(`../assets/sources/${this.$route.params.type}/${this.$route.params.id}.html?raw`);
+            this.html = foo.default;
+            this.loading = true;
+            await nextTick();
+            this.loading = false;
+            console.log("this.html");
+            this.tocHighlight();
+        },
+        tocHighlight() {
+            this.getToc(this.selector, this.tocOptions);
+            console.log(this.toc);
+            if (this.toc === undefined) return;
+            this.loadingHeaders = false;
+
+            const nodes = document.querySelectorAll(this.toc.headerSelector);
+            if (nodes === undefined) return;
+
+            // Creating the intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting)
+                        //update current state if the target element intersects 
+                        //with the intersection observer's root or root margin
+                        this.currentSection = entry.target.getAttribute("id");
+                });
+            }, {});
+
+            nodes.forEach((target) => {
+                observer.observe(target);
+            });
+        },
+        getToc() {
+            const contentNode = document.querySelector(this.selector);
+            if (!contentNode) return;
+
+            /**
+             * Generate ID using heading text
+             * @param  {node} el The heading element
+             */
+            const GenerateID = (el) => {
+                return el.innerText.toLowerCase().replace(/[^A-Za-z0-9]/g, "-");
+            };
+
+            // Set toc header selector
+            this.toc.headerSelector = `${this.selector} .${this.tocOptions.headerClass}`;
+
+            contentNode.querySelectorAll(this.tocOptions.headinglevels).forEach((el) => {
+                let id = el.getAttribute("id") || GenerateID(el);
+
+                // Set ID
+                el.setAttribute("id", id);
+
+                // Set header class
+                el.classList.add(this.tocOptions.headerClass);
+
+                // Append extracted heading to toc
+                // h2 -> indent 1, h3 -> indent 2 etc.
+                this.toc.headers.push({
+                    id: id,
+                    text: el.innerText,
+                    indent: parseInt(el.tagName.slice(1)) - 1,
+                });
+
+                // Create anchor tag
+                if (this.tocOptions.appendAnchor) {
+                    const anchor = document.createElement("a");
+                    anchor.classList.add(this.tocOptions.anchorClass);
+                    anchor.href = `#${id}`;
+                    //anchor.innerText = "#";
+                    el.prepend(anchor);
+                }
+            });
+
+        },
     }
 }
 </script>
 <template>
     <div class="flex justify-center m-4">
-        <div class="">
+        <div>
             <div class="section-nav border border-zinc-600 text-sm overflow-scroll h-[800px] sticky top-16 mx-2">
-                <nav class="">
+                <nav v-if="!loadingHeaders">
                     <ul>
                         <li :class="{ active: header.id == currentSection }" v-for="header in toc.headers"
                             :key="header.id">
@@ -42,9 +130,10 @@ export default {
 
         </div>
         <div class="p-4 max-w-3xl bg-zinc-800 source">
-            <article v-html="rawhtml" data-toc-content></article>
+            <article v-html="html" data-toc-content></article>
         </div>
     </div>
+
 </template>
 
 <style>

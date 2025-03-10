@@ -1,5 +1,5 @@
 //Adapted from https://github.com/ethan-lamwah/vue3-scroll-spy-toc/tree/main
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUpdated } from "vue";
 
 export function useScrollToc(selector, tocOptions, observerOptions) {
   const _tocOptions = tocOptions || {};
@@ -9,6 +9,7 @@ export function useScrollToc(selector, tocOptions, observerOptions) {
   const toc = ref({});
 
   onMounted(() => {
+    console.log("mount");
     toc.value = getToc(selector, _tocOptions);
     if (toc.value === undefined) return;
 
@@ -29,6 +30,7 @@ export function useScrollToc(selector, tocOptions, observerOptions) {
       observer.observe(target);
     });
   });
+
   return { currentSection, toc };
 }
 

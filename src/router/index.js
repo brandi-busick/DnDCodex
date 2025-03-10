@@ -7,7 +7,10 @@ import SpellPage from '@/views/SpellPage.vue'
 import MonsterPage from '@/views/MonsterPage.vue'
 import ItemPage from '@/views/ItemPage.vue'
 import CreateNewView from '@/views/CreateNewView.vue'
-import SourceView from '@/views/SourceView.vue'
+import SourcesListView from '@/views/SourcesListView.vue'
+import SourcePage from '@/views/SourcePage.vue'
+import MonsterBuilder from '@/views/MonsterBuilder.vue'
+import LazyGMResourcePage from '@/views/LazyGMResourcePage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,13 +29,13 @@ const router = createRouter({
       component: MonsterPage
     },
     {
-      path: '/items',
-      name: 'items',
+      path: '/magic-items',
+      name: 'magic-items',
       component: ItemsView
     },
     {
-      path: '/items/:id',
-      name: 'item',
+      path: '/magic-items/:id',
+      name: 'magic-item',
       component: ItemPage
     },
     {
@@ -50,8 +53,20 @@ const router = createRouter({
       component: CreateNewView
     },
     {
-      path: '/source',
-      component: SourceView
+      path: '/source/:type/:id',
+      component: SourcePage
+    },
+    {
+      path: '/sources',
+      component: SourcesListView
+    },
+    {
+      path: '/monsterBuilder',
+      component: MonsterBuilder
+    },
+    {
+      path: '/lazygmresource',
+      component: LazyGMResourcePage
     },
     {
       path: '/about',
