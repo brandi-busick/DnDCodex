@@ -1,10 +1,10 @@
 # DnDCodex
 
-This template should help get you started developing with Vue 3 in Vite.
+Webpage for viewing and searching TTRPG content with Vue 3 in Vite.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/).
 
 ## Customize configuration
 
@@ -36,13 +36,16 @@ npm run lint
 
 ### Web description
 
-Home
-    Monsters
-        Search by CR, types etc
-    Spells
-        Search by level school etc
-    Items
-        Random Item Tables
-    Add New
-        monster, item, spell
+#### About
+    This website is meant to be a convenient way to view your D&D 5e content. It should be free, open-source, modular, and localized
+##### Monsters
+    Search by CR, types etc.
+##### Spells
+    Search by level, school etc.
+##### Items
+    Search by type, rarity etc.
+##### Add New
+    Monster, item, spell.
+##### Source
+    View sourcebooks and resources with a table of contents
     
